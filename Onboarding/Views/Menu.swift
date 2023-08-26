@@ -46,6 +46,16 @@ struct Menu: View {
                     Rectangle()
                         .foregroundColor(Color(red: 0.29, green: 0.37, blue: 0.34))
                         .frame(width: 428, height: 309)
+                    
+                    Image("Hero image")
+                    .resizable()
+                    .aspectRatio(contentMode: .fill)
+                    .frame(width: 139, height: 144)
+                    .clipped()
+                    .cornerRadius(16)
+                    .frame(width: 200, height: 100)
+                    .frame(width: 1, alignment: .leading)
+                    
                     VStack(spacing: 20) {
                         Text("Little Lemon")
                             .font(
@@ -54,15 +64,18 @@ struct Menu: View {
                             )
                             .foregroundColor(Color(red: 0.96, green: 0.81, blue: 0.08))
                             .frame(width: 350, alignment: .leading)
+                            .padding(.top)
                         
                         Text("Chicago")
-                            .font(Font.custom("Markazi Text", size: 40))
+                            .font(Font.custom("Markazi Text", size: 60))
                             .foregroundColor(.white)
+                            .frame(height: 30)
                             .frame(width: 350, alignment: .leading)
                         
                         Text("We are a family owned Mediterranean restaurant, focused on traditional recipes served with a modern twist.")
                             .font(Font.custom("Inter", size: 16))
                             .foregroundColor(.white)
+                            .frame(width: 200, height: 100)
                             .frame(width: 350, alignment: .leading)
                         
                         
@@ -79,19 +92,19 @@ struct Menu: View {
                                     Spacer()
                                     TextField("Search", text: $searchText)
                                         .padding(.horizontal)
-
+                                    
                                 }
                             )
-                        
                     }
                 }
                 Text("ORDER FOR DELIVERY!")
                     .font(
                         Font.custom("Karla", size: 20)
-                            .weight(.heavy)
-                        
+                            .weight(.medium)
                     )
                     .foregroundColor(.black)
+                    .frame(width: 350, alignment: .leading)
+                
                 
                 HStack(spacing: 10) {
                     Button(action: {
@@ -175,10 +188,27 @@ struct Menu: View {
                 List {
                     ForEach(dishes.filter { dish in buildPredicate(dish) }, id: \.self) { dish in
                         HStack {
-                            Text(dish.title ?? "")
-                            Text(dish.price ?? "")
-                            Text(dish.category ?? "")
-//                            Text(dish.description ?? "")
+                            VStack(alignment: .leading, spacing: 4) {
+                                Text(dish.title ?? "")
+                                    .font(
+                                        Font.custom("Karla", size: 16)
+                                            .weight(.bold)
+                                    )
+                                    .foregroundColor(.black)
+                                
+                                Text(dish.descriptionDish ?? "")
+                                    .font(Font.custom("Karla", size: 12))
+                                    .foregroundColor(.black)
+
+                                
+                                Text("$\(dish.price ?? "")")
+                                    .font(
+                                        Font.custom("Karla", size: 16)
+                                            .weight(.medium)
+                                    )
+                                    .foregroundColor(.black)
+                            }
+                            //                            Text(dish.category ?? "")
                             AsyncImage(url: URL(string: dish.image ?? "")) { phase in
                                 if let image = phase.image {
                                     image
@@ -193,7 +223,7 @@ struct Menu: View {
                                         .frame(width: 100, height: 100)
                                 } else {
                                     ProgressView()
-                                        .frame(width: 100, height: 100)
+                                    //                                        .frame(width: 100, height: 100)
                                 }
                             }
                         }
@@ -236,13 +266,14 @@ struct Menu: View {
                         DispatchQueue.main.async {
                             let viewContext = PersistenceController.shared.container.viewContext
                             
+                            
                             for menuItem in decodedResponse.menu {
                                 let dish = Dish(context: viewContext)
                                 dish.title = menuItem.title
                                 dish.image = menuItem.image
                                 dish.price = menuItem.price
                                 dish.category = menuItem.category
-//                                dish.description = menuItem.description
+                                dish.descriptionDish = menuItem.descriptionDish
                             }
                             
                             do {
@@ -267,7 +298,7 @@ struct Menu: View {
 struct Menu_Previews: PreviewProvider {
     static var previews: some View {
         Menu()
- 
+        
     }
 }
 

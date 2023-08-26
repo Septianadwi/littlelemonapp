@@ -19,6 +19,7 @@ struct Home: View {
                     Image(systemName: "list.bullet")
                 }
                 .environment(\.managedObjectContext, persistence.container.viewContext)
+            
             //
             //            Maps()
             //                .tabItem {
