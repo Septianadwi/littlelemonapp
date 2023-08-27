@@ -9,6 +9,7 @@ This repository contains the final project for the "Create the User Interface wi
 ## Project Description
 
 The "Little Lemon App" is a user interface design project created as part of the **Create the User Interface with SwiftUI** course. It demonstrates the skills and techniques learned during the course in building intuitive and visually appealing user interfaces using SwiftUI.
+![Litlelemon6](https://github.com/Septianadwi/littlelemonapp/assets/107457070/ee9f6a29-0a9a-43f2-9114-8a9d0864ffd7)
 
 ## Figma Design
 
