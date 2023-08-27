@@ -1,10 +1,10 @@
 # Little Lemon App
 
+This repository contains the final project for the "Create the User Interface with SwiftUI" course, which is part of the Meta iOS Developer Professional Certificate program. The project is called "Little Lemon App."
+
 ![Litlelemon1](https://github.com/Septianadwi/littlelemonapp/assets/107457070/fd36b1e5-db7e-4f9f-bfc2-72d942c020dd)
 
 ![Githublitlelemon](https://github.com/Septianadwi/littlelemonapp/assets/107457070/ce7ce327-3d8f-4ffc-89f8-d0035eae5cad)
-
-This repository contains the final project for the "Create the User Interface with SwiftUI" course, which is part of the Meta iOS Developer Professional Certificate program. The project is called "Little Lemon App."
 
 ## Project Description
 
