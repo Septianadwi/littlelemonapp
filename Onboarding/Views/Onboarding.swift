@@ -42,7 +42,7 @@ struct Onboarding: View {
                             .weight(.medium)
                     )
                     .foregroundColor(.black)
-                    .frame(width: 310, alignment: .leading)
+                    .frame(width: 350, alignment: .leading)
                 
                 
                 TextField("Name", text: $name)

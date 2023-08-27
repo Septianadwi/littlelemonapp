@@ -17,6 +17,7 @@ struct UserProfile: View {
     @State private var isPasswordChangesChecked = false
     @State private var isSpecialOffersChecked = false
     @State private var isNewsletterChecked = false
+    @State private var showAlert = false
     
     @Environment(\.presentationMode) var presentation
     
@@ -29,7 +30,7 @@ struct UserProfile: View {
                     .foregroundColor(.black)
                     .padding(.horizontal)
                 
-                HStack(spacing: 1) {
+                HStack(spacing: 5) {
                     Button(action: {}) {
                         Image("profile-image-placeholder")
                             .resizable()
@@ -68,21 +69,32 @@ struct UserProfile: View {
                 }
                 
                 TextFieldView(title: "First Name", placeholder: "", text: $firstName)
+                    .padding(.horizontal)
+                
                 TextFieldView(title: "Last Name", placeholder: "", text: $lastName)
+                    .padding(.horizontal)
                 TextFieldView(title: "Email", placeholder: "", text: $email)
+                    .padding(.horizontal)
                 TextFieldView(title: "Phone Number", placeholder: "", text: $phoneNumber)
+                    .padding(.horizontal)
             }
             
             VStack(alignment: .leading, spacing: 16) {
                 Text("Email notifications")
-                    .font(Font.custom("Karla", size: 15).weight(.bold))
+                    .font(Font.custom("Karla", size: 16).weight(.bold))
                     .foregroundColor(.black)
                     .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding()
                 
                 CheckBoxRow(title: "Order statuses", isChecked: $isOrderStatusesChecked)
+                    .padding(.horizontal)
                 CheckBoxRow(title: "Password changes", isChecked: $isPasswordChangesChecked)
+                    .padding(.horizontal)
                 CheckBoxRow(title: "Special offers", isChecked: $isSpecialOffersChecked)
+                    .padding(.horizontal)
                 CheckBoxRow(title: "Newsletter", isChecked: $isNewsletterChecked)
+                    .padding(.horizontal)
+                
             }
             
             VStack(spacing: 16) {
@@ -91,20 +103,57 @@ struct UserProfile: View {
                 }
                 
                 HStack(spacing: 16) {
-                    Button("Discard Changes") {
-                        // Action for discarding changes
+                    Button(action: {
+                        // Action for Discard Changes
+                    }) {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(.clear)
+                                .frame(width: 114, height: 30)
+                                .background(.white)
+                                .cornerRadius(5)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 5)
+                                        .inset(by: 0.5)
+                                        .stroke(Color.black.opacity(0.25), lineWidth: 1)
+                                )
+                            
+                            Text("Discard Changes")
+                                .font(.custom("Poppins", size: 12))
+                                .foregroundColor(Color(red: 0.29, green: 0.37, blue: 0.34))
+                        }
                     }
-                    .buttonStyle(RectangleButtonStyle(isPrimary: false))
                     
-                    Button("Save Changes") {
-                        // Action for saving changes
+                    Button(action: {
+                        showAlert = true
+                    }) {
+                        ZStack {
+                            Rectangle()
+                                .foregroundColor(Color(red: 0.29, green: 0.37, blue: 0.34))
+                                .frame(width: 114, height: 30)
+                                .cornerRadius(5)
+                            
+                            Text("Save Changes")
+                                .font(.custom("Poppins", size: 12))
+                                .foregroundColor(.white)
+                        }
                     }
-                    .buttonStyle(RectangleButtonStyle(isPrimary: true))
+                }
                 }
             }
-            .padding()       }
+            .padding()
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text("Save Successful"),
+                    message: Text("Your changes have been saved."),
+                    dismissButton: .default(Text("OK"))
+                )
+            }
+        }
+//        .padding()
+        
     }
-}
+//}
 
 
 struct RectangleButton: View {

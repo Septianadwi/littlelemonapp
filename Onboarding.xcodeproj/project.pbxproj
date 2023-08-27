@@ -127,9 +127,9 @@
 				8E4A96D32A887FB50005F944 /* Onboarding.swift */,
 				8E4A96D72A8889230005F944 /* Menu.swift */,
 				8E4A96D52A8888620005F944 /* Home.swift */,
-				8EFD4AB82A99DF9500BE4921 /* CategoryList.swift */,
 				8E4A96D92A89384E0005F944 /* UserProfile.swift */,
 				8EF77DEE2A9A383E002AAFBD /* DetailItem.swift */,
+				8EFD4AB82A99DF9500BE4921 /* CategoryList.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

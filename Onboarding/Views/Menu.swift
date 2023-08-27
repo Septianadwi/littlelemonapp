@@ -269,7 +269,7 @@ struct Menu: View {
                 if let data = data {
                     let decoder = JSONDecoder()
                     do {
-                        // Clear the database before saving new data
+    
                         PersistenceController.shared.clear()
                         
                         let decodedResponse = try decoder.decode(MenuList.self, from: data)
