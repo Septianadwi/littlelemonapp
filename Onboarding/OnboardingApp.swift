@@ -14,4 +14,7 @@ struct OnboardingApp: App {
             Onboarding()
         }
     }
-}
+    init() {
+            UserDefaults.standard.set(true, forKey: "com.apple.CoreData.SQLDebug")
+        }
+    }

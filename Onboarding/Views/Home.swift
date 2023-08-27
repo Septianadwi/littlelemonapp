@@ -18,6 +18,7 @@ struct Home: View {
                     Text("Menu")
                     Image(systemName: "list.bullet")
                 }
+                .navigationBarHidden(true)
                 .environment(\.managedObjectContext, persistence.container.viewContext)
             
             //
@@ -31,10 +32,8 @@ struct Home: View {
                 .tabItem {
                     Text("Profile")
                     Image(systemName: "square.and.pencil")
-                    
-                    
+
                 }
-                .navigationBarBackButtonHidden(true)
         }
         
     }

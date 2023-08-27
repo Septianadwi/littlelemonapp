@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct MenuItem: Decodable {
+struct MenuItem: Decodable, Identifiable {
     var id = UUID()
     let title: String
     let image: String

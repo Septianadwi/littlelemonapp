@@ -48,13 +48,13 @@ struct Menu: View {
                         .frame(width: 428, height: 309)
                     
                     Image("Hero image")
-                    .resizable()
-                    .aspectRatio(contentMode: .fill)
-                    .frame(width: 139, height: 144)
-                    .clipped()
-                    .cornerRadius(16)
-                    .frame(width: 200, height: 100)
-                    .frame(width: 1, alignment: .leading)
+                        .resizable()
+                        .aspectRatio(contentMode: .fill)
+                        .frame(width: 139, height: 144)
+                        .clipped()
+                        .cornerRadius(16)
+                        .frame(width: 200, height: 100)
+                        .frame(width: 1, alignment: .leading)
                     
                     VStack(spacing: 20) {
                         Text("Little Lemon")
@@ -181,34 +181,25 @@ struct Menu: View {
                         }
                         
                     }
-                    
                 }
                 
                 
                 List {
-                    ForEach(dishes.filter { dish in buildPredicate(dish) }, id: \.self) { dish in
-                        HStack {
-                            VStack(alignment: .leading, spacing: 4) {
-                                Text(dish.title ?? "")
-                                    .font(
-                                        Font.custom("Karla", size: 16)
-                                            .weight(.bold)
-                                    )
-                                    .foregroundColor(.black)
-                                
-                                Text(dish.descriptionDish ?? "")
-                                    .font(Font.custom("Karla", size: 12))
-                                    .foregroundColor(.black)
-
-                                
-                                Text("$\(dish.price ?? "")")
-                                    .font(
-                                        Font.custom("Karla", size: 16)
-                                            .weight(.medium)
-                                    )
-                                    .foregroundColor(.black)
-                            }
-                            //                            Text(dish.category ?? "")
+                    ForEach(dishes.filter { dish in
+                        let titleMatches = searchText.isEmpty || (dish.title ?? "").localizedStandardContains(searchText)
+                        
+                        var categoryMatches = true
+                        if let selectedCategory = selectedCategory {
+                            categoryMatches = dish.category == selectedCategory
+                        }
+                        
+                        return titleMatches && categoryMatches
+                    }, id: \.self) { dish in
+                        
+                        
+                        
+                        HStack(spacing: 20) { // Adjust the spacing as needed
+                            
                             AsyncImage(url: URL(string: dish.image ?? "")) { phase in
                                 if let image = phase.image {
                                     image
@@ -223,8 +214,27 @@ struct Menu: View {
                                         .frame(width: 100, height: 100)
                                 } else {
                                     ProgressView()
-                                    //                                        .frame(width: 100, height: 100)
                                 }
+                            }
+                            
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text(dish.title ?? "")
+                                    .font(
+                                        Font.custom("Karla", size: 16)
+                                            .weight(.bold)
+                                    )
+                                    .foregroundColor(.black)
+                                
+                                Text(dish.descriptionDish ?? "")
+                                    .font(Font.custom("Karla", size: 12))
+                                    .foregroundColor(.black)
+                                
+                                Text("$\(dish.price ?? "")")
+                                    .font(
+                                        Font.custom("Karla", size: 16)
+                                            .weight(.medium)
+                                    )
+                                    .foregroundColor(.black)
                             }
                         }
                     }
@@ -248,6 +258,7 @@ struct Menu: View {
         } else {
             return (dish.title ?? "").localizedStandardContains(searchText)
         }
+        
     }
     
     func getMenuData() {
